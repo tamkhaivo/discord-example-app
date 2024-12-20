@@ -26,7 +26,7 @@ const TEST_COMMAND = {
   contexts: [0, 1, 2],
 };
 
-// Command containing options
+/* Command containing options
 const CHALLENGE_COMMAND = {
   name: 'challenge',
   description: 'Challenge to a match of rock paper scissors',
@@ -43,6 +43,7 @@ const CHALLENGE_COMMAND = {
   integration_types: [0, 1],
   contexts: [0, 2],
 };
+*/
 
 const ALL_COMMANDS = [TEST_COMMAND, CHALLENGE_COMMAND];
 
