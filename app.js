@@ -5,7 +5,9 @@ import {
   InteractionResponseType,
   verifyKeyMiddleware,
 } from "discord-interactions";
-import { getRandomEmoji } from "./utils.js";
+
+import { test } from "./commands/test.js";
+
 
 // Create an express app
 const app = express();
@@ -39,36 +41,12 @@ app.post(
 
       // "test" command
       if (name === "test") {
-        
-        forum.threads
-          .create({
-            name: "Food Talk",
-            autoArchiveDuration: ThreadAutoArchiveDuration.OneHour,
-            message: {
-              content: "Discuss your favorite food!",
-            },
-            reason: "Needed a separate thread for food",
-          })
-          .then((threadChannel) => console.log(threadChannel))
-          .catch(console.error);
-
-        
-        // Send a message into the channel where command was triggered from
-        return res.send({
-          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-          data: {
-            // Fetches a random emoji to send from a helper function
-            content: `hello world ${getRandomEmoji()}`,
-          },
-        });
+        return test(req, res);
       }
 
-      console.error(`unknown command: ${name}`);
-      return res.status(400).json({ error: "unknown command" });
+      console.error("unknown interaction type", type);
+      return res.status(400).json({ error: "unknown interaction type" });
     }
-
-    console.error("unknown interaction type", type);
-    return res.status(400).json({ error: "unknown interaction type" });
   }
 );
 
